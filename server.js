@@ -40,8 +40,12 @@ app.get('/api/hello', function(req, res) {
 app.post('/api/shorturl', async (req,res) => {
     // takes the body of the post request, in this case, it's an URL
   const reqURL = req.body.url;
-  let expr = "((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)";
-  let regex = new RegExp(expr);
+  let regex = new RegExp('^(https?:\\/\\/)?'+ 
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ 
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
+    '(\\#[-a-z\\d_]*)?$','i');
   if (reqURL.match(regex)) {
       // it returns all the objects inside the collection
     const urls = await oneURL.find ()
