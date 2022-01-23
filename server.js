@@ -14,7 +14,6 @@ const urlSchema = new Schema({
   short_url: Number
 });
 
-  // Creating and saving a person
 const oneURL = mongoose.model("oneURL", urlSchema);
 
 // Basic Configuration
